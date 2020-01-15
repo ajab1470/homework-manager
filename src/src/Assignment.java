@@ -75,7 +75,7 @@ public class Assignment implements Comparable<Assignment> {
     public String toString() {
         return name.toUpperCase() + "\t" + (due/100) + " / " + (due&100) + "\t"
                 + (assigned/100) + " / " + (assigned%100) + "\t"
-                + (description.length() > 16 ? (description.substring(13) + "...") : description);
+                + (description.length() > 16 ? (description.substring(0,13) + "...") : description);
     }
 }
 
