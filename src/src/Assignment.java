@@ -5,7 +5,6 @@
  * Assignment object. Defined by name, date assigned, date due, description
  */
 
-import java.util.*;
 import java.lang.*;
 
 public class Assignment implements Comparable<Assignment> {
@@ -29,6 +28,14 @@ public class Assignment implements Comparable<Assignment> {
         this.due = due;
         this.name = name;
         this.description = description;
+    }
+
+    /**
+     * The assignment got pushed! (I hope)
+     * @param due the new due date
+     */
+    public void setDue(int due) {
+        this.due = due;
     }
 
     /**
