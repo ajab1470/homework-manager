@@ -9,12 +9,52 @@ import java.lang.*;
 
 public class Assignment implements Comparable<Assignment> {
     public enum Course {
-        AMT, CoCs, SWEN, COOP, STATS, CHEM;
+        AMT {
+            @Override
+            public String toString() {
+                return "AMT";
+            }
+        },
+        COCs {
+            @Override
+            public String toString() {
+                return "COCs";
+            }
+        },
+        SWEN {
+            @Override
+            public String toString() {
+                return "SWEN";
+            }
+        },
+        COOP {
+            @Override
+            public String toString() {
+                return "COOP";
+            }
+        },
+        STATS {
+            @Override
+            public String toString() {
+                return "STATS";
+            }
+        },
+        CHEM {
+            @Override
+            public String toString() {
+                return "CHEM";
+            }
+        }
     }
+
     private Course course;
-    /** must be 4 digit number of format MMDD */
+    /**
+     * must be 4 digit number of format MMDD
+     */
     private int assigned;
-    /** must be 4 digit number of format MMDD */
+    /**
+     * must be 4 digit number of format MMDD
+     */
     private int due;
     private String name;
     private String description;
@@ -32,6 +72,7 @@ public class Assignment implements Comparable<Assignment> {
 
     /**
      * The assignment got pushed! (I hope)
+     *
      * @param due the new due date
      */
     public void setDue(int due) {
@@ -40,7 +81,7 @@ public class Assignment implements Comparable<Assignment> {
 
     /**
      * Assignments are ordered first by date due (earliest), then by date assigned (earliest), and lastly alphabetically
-     *  by name
+     * by name
      */
     @Override
     public int compareTo(Assignment o) {
@@ -73,9 +114,9 @@ public class Assignment implements Comparable<Assignment> {
 
     @Override
     public String toString() {
-        return name.toUpperCase() + "\t" + (due/100) + " / " + (due&100) + "\t"
-                + (assigned/100) + " / " + (assigned%100) + "\t"
-                + (description.length() > 16 ? (description.substring(0,13) + "...") : description);
+        return name.toUpperCase() + "\t" + (due / 100) + " / " + (due & 100) + "\t"
+                + (assigned / 100) + " / " + (assigned % 100) + "\t"
+                + (description.length() > 16 ? (description.substring(0, 13) + "...") : description);
     }
 }
 
