@@ -8,46 +8,8 @@
 import java.lang.*;
 
 public class Assignment implements Comparable<Assignment> {
-    public enum Course {
-        AMT {
-            @Override
-            public String toString() {
-                return "AMT";
-            }
-        },
-        COCs {
-            @Override
-            public String toString() {
-                return "COCs";
-            }
-        },
-        SWEN {
-            @Override
-            public String toString() {
-                return "SWEN";
-            }
-        },
-        COOP {
-            @Override
-            public String toString() {
-                return "COOP";
-            }
-        },
-        STATS {
-            @Override
-            public String toString() {
-                return "STATS";
-            }
-        },
-        CHEM {
-            @Override
-            public String toString() {
-                return "CHEM";
-            }
-        }
-    }
 
-    private Course course;
+    private String course;
     /**
      * must be 4 digit number of format MMDD
      */
@@ -62,7 +24,7 @@ public class Assignment implements Comparable<Assignment> {
     /**
      * Creates a new assignment
      */
-    public Assignment(Course course, int assigned, int due, String name, String description) {
+    public Assignment(String course, int assigned, int due, String name, String description) {
         this.course = course;
         this.assigned = assigned;
         this.due = due;
@@ -115,7 +77,7 @@ public class Assignment implements Comparable<Assignment> {
     @Override
     public String toString() {
         return name.toUpperCase() + "\t" + (due / 100) + " / " + (due & 100) + "\t"
-                + (assigned / 100) + " / " + (assigned % 100) + "\t"
+                + (assigned / 100) + " / " + (assigned % 100) + "\t" + course + "\t"
                 + (description.length() > 16 ? (description.substring(0, 13) + "...") : description);
     }
 }
