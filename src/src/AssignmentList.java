@@ -11,27 +11,24 @@
  */
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class AssignmentList {
     private List<Assignment> assignmentList = new ArrayList<>();
-    private static BufferedWriter writer;
-    private static BufferedReader reader;
+    private File file;
 
-
-    public AssignmentList(String path) {
-        File file = new File(path);
-        //handling the IOException that will never happens
-        try {
-            writer = new BufferedWriter(new FileWriter(file));
-            reader = new BufferedReader(new FileReader(file));
-            makeList();
-        } catch (IOException e) {
-            System.err.println("The file you know exists somehow doesn't exist.");
-            System.err.println(e.getMessage());
-            System.exit(1);
-        }
+    /**
+     * create a new AssignmentList
+     * @param path the path to the file to alter
+     * @throws IOException from makeList
+     */
+    public AssignmentList(String path) throws IOException {
+        this.file = new File(path);
+        //handling the IOException that will never happen
+        makeList();
     }
 
     /**
@@ -39,21 +36,21 @@ public class AssignmentList {
      * @param date the string representation of the date
      * @return the int representation of the date
      */
-    private int parseDate (String date) {
+    public static int parseDate (String date) {
         //multiplies the month by 100 and adds it to the day
         return Integer.parseInt(date.substring(0,2)) * 100 + Integer.parseInt(date.substring(3,5));
     }
 
     /**
      * makes the assignmentList so far from the file's current contents
-     * @throws IOException literally never (hopefully)
+     * @throws IOException from Files::readAllLines
      */
-    private void makeList() throws IOException{
+    private void makeList() throws IOException {
+        //TODO update to match file format if necessary
+        List<String> lines = Files.readAllLines(file.toPath());
         //the first line will be garbage
-        //TODO update to package
-        String line = reader.readLine();
-        while (line!=null) {
-            line = reader.readLine();
+        for (int i = 0; i < lines.size(); i++) {
+            String line = lines.get(i);
             //see Assignment::toString
             String[] elements = line.split("\t");
             String name = elements[0];
@@ -78,5 +75,43 @@ public class AssignmentList {
             }
         }
         assignmentList.add(assignment);
+    }
+
+    /**
+     * marks the top assignment as complete and returns it, removing it from the list of assignments
+     * @return the top assignment after successful removal
+     */
+    public Assignment complete() {
+        return assignmentList.remove(0);
+    }
+
+    /**
+     * writes out the file
+     * @throws IOException from Files::write
+     */
+    public void updateFile() throws IOException {
+        List<String> lines = new ArrayList<>();
+        //the first line
+        lines.add("Name\tDate Due\tDate Assigned\tCourse\tDescription");
+        for (Assignment assignment : assignmentList) {
+            lines.add(assignment.toString());
+        }
+        Files.write(file.toPath(), lines);
+    }
+
+    /**
+     * searches the assignment list for a specific assignment
+     * Note: please do not change any of the assignments returned
+     * @param name the name of the assignment to search for
+     * @return all assignments in the list with that name
+     */
+    public List<Assignment> getAssignment(String name) {
+        List<Assignment> assignments = new ArrayList<>();
+        for (Assignment assignment : assignmentList) {
+            if (assignment.getName().equals(name)) {
+                assignments.add(assignment);
+            }
+        }
+        return assignments;
     }
 }

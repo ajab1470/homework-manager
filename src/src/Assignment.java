@@ -34,11 +34,18 @@ public class Assignment implements Comparable<Assignment> {
 
     /**
      * The assignment got pushed! (I hope)
-     *
      * @param due the new due date
      */
     public void setDue(int due) {
         this.due = due;
+    }
+
+    /**
+     * returns the name
+     * @return the name of this assignment
+     */
+    public String getName() {
+        return name;
     }
 
     /**
