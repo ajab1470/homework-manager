@@ -28,7 +28,14 @@ public class Assignment implements Comparable<Assignment> {
      */
     public static int parseDate (String date) {
         //multiplies the month by 100 and adds it to the day
-        return Integer.parseInt(date.substring(0, 2)) * 100 + Integer.parseInt(date.substring(3, 5));
+        try {
+            return Integer.parseInt(date.substring(0, 2)) * 100 + Integer.parseInt(date.substring(3, 5));
+        } catch (StringIndexOutOfBoundsException e) {
+            System.err.println("Could not parse date " + date);
+            e.printStackTrace();
+            System.exit(1);
+        }
+        return 0;
     }
 
     /**
@@ -66,7 +73,7 @@ public class Assignment implements Comparable<Assignment> {
     public int compareTo(Assignment o) {
         if (o.due == this.due) {
             if (o.assigned == this.assigned) {
-                return this.name.compareTo(o.name);
+                return this.name.toUpperCase().compareTo(o.name.toUpperCase());
             } else if (parseDate(this.assigned) < parseDate(o.assigned)) {
                 return -1;
             } else {
@@ -87,14 +94,15 @@ public class Assignment implements Comparable<Assignment> {
         if (obj instanceof Assignment) {
             Assignment o = (Assignment) obj;
             return parseDate(o.due) == parseDate(this.due) &&
-                    parseDate(o.assigned) == parseDate(this.assigned) && o.name.equals(this.name);
+                    parseDate(o.assigned) == parseDate(this.assigned) &&
+                    o.name.toUpperCase().equals(this.name.toUpperCase());
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return name.toUpperCase() + "\t" + assigned + "\t" + due + "\t" + course + "\t"
+        return name + "\t" + assigned + "\t" + due + "\t" + course + "\t"
                 + (description.length() > 32 ? (description.substring(0, 29) + "...") : description);
     }
 }

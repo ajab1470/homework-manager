@@ -40,10 +40,10 @@ public class AssignmentList {
         for (int i = 0; i < lines.size(); i++) {
             String line = lines.get(i);
             //see Assignment::toString
-            String[] elements = line.split("[ \t\n\r]");
+            String[] elements = line.split("\\s+", 5);
             String name = elements[0];
-            String due = elements[1];
-            String assigned = elements[2];
+            String assigned = elements[1];
+            String due = elements[2];
             String course = elements[3];
             String description = elements[4];
             Assignment assignment = new Assignment(course, assigned, due, name, description);
