@@ -89,15 +89,27 @@ public class AssignmentList {
      * searches the assignment list for a specific assignment
      * Note: please do not change any of the assignments returned
      * @param name the name of the assignment to search for
-     * @return all assignments in the list with that name
+     * @return all assignments in the list that contain that name
      */
     public List<Assignment> getAssignment(String name) {
         List<Assignment> assignments = new ArrayList<>();
         for (Assignment assignment : assignmentList) {
-            if (assignment.getName().equals(name)) {
+            if (assignment.getName().toUpperCase().contains(name.toUpperCase())) {
                 assignments.add(assignment);
             }
         }
         return assignments;
+    }
+
+    /**
+     * alter an assignment in the list and update list order
+     * @pre assignment is in the list
+     * @param assignment the assignment to adjust
+     * @param date the new due date of that assignment
+     */
+    public void push(Assignment assignment, String date) {
+        assignment.setDue(date);
+        assignmentList.remove(assignmentList.indexOf(assignment));
+        add(assignment);
     }
 }

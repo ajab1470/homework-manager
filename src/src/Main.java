@@ -7,6 +7,8 @@
  */
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -38,7 +40,23 @@ public class Main {
                 } else if (input.equals("edit")) {
                     System.out.print("Give the name of the assignment to edit: ");
                     String name = scan.nextLine();
-                    //TODO implement
+                    List<Assignment> assignments = assignmentList.getAssignment(name);
+                    Assignment assignment = null;
+                    for (Assignment a : assignments) {
+                        System.out.println("Is this the correct assignment? (y for yes)\n" + a);
+                        String response = scan.nextLine();
+                        if (response.equals("y")) {
+                            assignment = a;
+                            break;
+                        }
+                    }
+                    if (assignment == null) {
+                        System.out.println("Assignment not found.");
+                    } else {
+                        System.out.print("Enter new due date: ");
+                        String date = scan.nextLine();
+                        assignmentList.push(assignment, date);
+                    }
                 } else if (input.equals("complete")) {
                     Assignment assignment = assignmentList.complete();
                     System.out.println("Assignment \"" + assignment.getName() + "\" marked complete. Nice job!");
