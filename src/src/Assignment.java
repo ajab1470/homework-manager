@@ -102,8 +102,10 @@ public class Assignment implements Comparable<Assignment> {
 
     @Override
     public String toString() {
-        return name + "\t" + assigned + "\t" + due + "\t" + course + "\t"
-                + (description.length() > 32 ? (description.substring(0, 29) + "...") : description);
+        return String.format(
+                "%-16s%-8s%-8s%-12s%s", name, assigned, due, course,
+                (description.length() > 32 ? (description.substring(0, 29) + "...") : description)
+        );
     }
 }
 

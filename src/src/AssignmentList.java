@@ -38,7 +38,7 @@ public class AssignmentList {
         //TODO update to match file format if necessary
         List<String> lines = Files.readAllLines(file.toPath());
         for (int i = 0; i < lines.size(); i++) {
-            String line = lines.get(i);
+            String line = lines.get(i).strip();
             //see Assignment::toString
             String[] elements = line.split("\\s+", 5);
             String name = elements[0];
