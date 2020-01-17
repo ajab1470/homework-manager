@@ -27,9 +27,9 @@ public class Main {
                     System.out.print("Assignment name: ");
                     String name = scan.nextLine();
                     System.out.print("Date assigned: ");
-                    int assigned = AssignmentList.parseDate(scan.nextLine());
+                    String assigned = scan.nextLine();
                     System.out.print("Date due: ");
-                    int due = AssignmentList.parseDate(scan.nextLine());
+                    String due = scan.nextLine();
                     System.out.print("Course: ");
                     String course = scan.nextLine();
                     System.out.print("Brief description: ");
@@ -49,7 +49,8 @@ public class Main {
                             "add\tadd a new assignment\n" +
                             "edit\tedit the due date on an assignment\n" +
                             "complete\tmark the top assignment as complete\n" +
-                            "quit\texit the program");
+                            "quit\texit the program\n" +
+                            "Note: All dates must be in the form MM/DD");
                 } //if else
             } //loop
             assignmentList.updateFile();

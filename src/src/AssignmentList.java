@@ -5,8 +5,7 @@
  *   (see Assignment::compareTo). Contains functionality to add, remove, or change assignments in the file
  *   Note: "top" assignment refers to the assignment of the highest priority (least according to natural ordering)
  *   Note: as of current version, the correct format of the text file is as follows:
- *      1. one line of any contents before assignments list
- *      2. one assignment per line containing ONLY the attributes of the assignment listed in the correct order (see
+ *      1. one assignment per line containing ONLY the attributes of the assignment listed in the correct order (see
  *         Assignment::toString) and separated by a "\t" character
  */
 
@@ -32,30 +31,19 @@ public class AssignmentList {
     }
 
     /**
-     * parses date from a string of format MM/DD into a 4 digit int of format MMDD
-     * @param date the string representation of the date
-     * @return the int representation of the date
-     */
-    public static int parseDate (String date) {
-        //multiplies the month by 100 and adds it to the day
-        return Integer.parseInt(date.substring(0,2)) * 100 + Integer.parseInt(date.substring(3,5));
-    }
-
-    /**
      * makes the assignmentList so far from the file's current contents
      * @throws IOException from Files::readAllLines
      */
     private void makeList() throws IOException {
         //TODO update to match file format if necessary
         List<String> lines = Files.readAllLines(file.toPath());
-        //the first line will be garbage
         for (int i = 0; i < lines.size(); i++) {
             String line = lines.get(i);
             //see Assignment::toString
-            String[] elements = line.split("\t");
+            String[] elements = line.split("[ \t\n\r]");
             String name = elements[0];
-            int due = parseDate(elements[1]);
-            int assigned = parseDate(elements[2]);
+            String due = elements[1];
+            String assigned = elements[2];
             String course = elements[3];
             String description = elements[4];
             Assignment assignment = new Assignment(course, assigned, due, name, description);
@@ -91,8 +79,6 @@ public class AssignmentList {
      */
     public void updateFile() throws IOException {
         List<String> lines = new ArrayList<>();
-        //the first line
-        lines.add("Name\tDate Due\tDate Assigned\tCourse\tDescription");
         for (Assignment assignment : assignmentList) {
             lines.add(assignment.toString());
         }

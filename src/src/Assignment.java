@@ -11,20 +11,30 @@ public class Assignment implements Comparable<Assignment> {
 
     private String course;
     /**
-     * must be 4 digit number of format MMDD
+     * must be of format MM/DD
      */
-    private int assigned;
+    private String assigned;
     /**
-     * must be 4 digit number of format MMDD
+     * must be of format MM/DD
      */
-    private int due;
+    private String due;
     private String name;
     private String description;
 
     /**
+     * parses date from a string of format MM/DD into a 4 digit int of format MMDD
+     * @param date the string representation of the date
+     * @return the int representation of the date
+     */
+    public static int parseDate (String date) {
+        //multiplies the month by 100 and adds it to the day
+        return Integer.parseInt(date.substring(0, 2)) * 100 + Integer.parseInt(date.substring(3, 5));
+    }
+
+    /**
      * Creates a new assignment
      */
-    public Assignment(String course, int assigned, int due, String name, String description) {
+    public Assignment(String course, String assigned, String due, String name, String description) {
         this.course = course;
         this.assigned = assigned;
         this.due = due;
@@ -36,7 +46,7 @@ public class Assignment implements Comparable<Assignment> {
      * The assignment got pushed! (I hope)
      * @param due the new due date
      */
-    public void setDue(int due) {
+    public void setDue(String due) {
         this.due = due;
     }
 
@@ -57,12 +67,12 @@ public class Assignment implements Comparable<Assignment> {
         if (o.due == this.due) {
             if (o.assigned == this.assigned) {
                 return this.name.compareTo(o.name);
-            } else if (this.assigned < o.assigned) {
+            } else if (parseDate(this.assigned) < parseDate(o.assigned)) {
                 return -1;
             } else {
                 return 1;
             }
-        } else if (this.due < o.due) {
+        } else if (parseDate(this.due) < parseDate(o.due)) {
             return -1;
         } else {
             return 1;
@@ -76,16 +86,16 @@ public class Assignment implements Comparable<Assignment> {
     public boolean equals(Object obj) {
         if (obj instanceof Assignment) {
             Assignment o = (Assignment) obj;
-            return o.due == this.due && o.assigned == this.assigned && o.name.equals(this.name);
+            return parseDate(o.due) == parseDate(this.due) &&
+                    parseDate(o.assigned) == parseDate(this.assigned) && o.name.equals(this.name);
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return name.toUpperCase() + "\t" + (due / 100) + " / " + (due & 100) + "\t"
-                + (assigned / 100) + " / " + (assigned % 100) + "\t" + course + "\t"
-                + (description.length() > 16 ? (description.substring(0, 13) + "...") : description);
+        return name.toUpperCase() + "\t" + assigned + "\t" + due + "\t" + course + "\t"
+                + (description.length() > 32 ? (description.substring(0, 29) + "...") : description);
     }
 }
 
