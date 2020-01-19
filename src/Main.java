@@ -63,11 +63,11 @@ public class Main {
                 } else if (input.equals("quit")) {
                     break;
                 } else {
-                    System.out.println("Usage:\nhelp\tdisplay this help message\n" +
-                            "add\tadd a new assignment\n" +
-                            "edit\tedit the due date on an assignment\n" +
-                            "complete\tmark the top assignment as complete\n" +
-                            "quit\texit the program\n" +
+                    System.out.println("Usage:\nhelp      display this help message\n" +
+                            "add       add a new assignment\n" +
+                            "edit      edit the due date on an assignment\n" +
+                            "complete  mark the top assignment as complete\n" +
+                            "quit      exit the program\n" +
                             "Note: All dates must be in the form MM/DD");
                 } //if else
             } //loop
