@@ -66,6 +66,14 @@ public class AssignmentList {
     }
 
     /**
+     * accesses the top assignment without being able to change it
+     * @return the string representation of the top assignment
+     */
+    public String top() {
+        return assignmentList.get(0).toString();
+    }
+
+    /**
      * marks the top assignment as complete and returns it, removing it from the list of assignments
      * @return the top assignment after successful removal
      */
@@ -94,6 +102,7 @@ public class AssignmentList {
     public List<Assignment> getAssignment(String name) {
         List<Assignment> assignments = new ArrayList<>();
         for (Assignment assignment : assignmentList) {
+            //if this assignment's name contains the name (non case sensitive)
             if (assignment.getName().toUpperCase().contains(name.toUpperCase())) {
                 assignments.add(assignment);
             }

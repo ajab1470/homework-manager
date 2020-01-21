@@ -60,12 +60,16 @@ public class Main {
                 } else if (input.equals("complete")) {
                     Assignment assignment = assignmentList.complete();
                     System.out.println("Assignment \"" + assignment.getName() + "\" marked complete. Nice job!");
+                } else if (input.equals("top")) {
+                    String top = assignmentList.top();
+                    System.out.println("The top assignment is currently:\n" + top);
                 } else if (input.equals("quit")) {
                     break;
                 } else {
                     System.out.println("Usage:\nhelp      display this help message\n" +
                             "add       add a new assignment\n" +
                             "edit      edit the due date on an assignment\n" +
+                            "top       check which assignment is currently the top\n" +
                             "complete  mark the top assignment as complete\n" +
                             "quit      exit the program\n" +
                             "Note: All dates must be in the form MM/DD");
