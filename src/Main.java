@@ -13,18 +13,20 @@ import java.util.Scanner;
 
 public class Main {
     /**
-     * takes user input from standard in to manage the file using a priority queue
+     * takes user input from standard in to manage the file using an AssignmentList
      * @param args unused command line arguments
      */
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Keeping Ashley's assignments prioritized");
+        System.out.println("Keeping Assignments Prioritized");
         try {
             AssignmentList assignmentList = new AssignmentList("C:/Users/Ashley/Desktop/assignments.txt");
             String input = "";
+            //command loop
             while (!input.equals("quit")) {
                 System.out.print("Enter command (or h for help): ");
                 input = scan.nextLine();
+                //add an assignment
                 if (input.equals("add")) {
                     System.out.print("Assignment name: ");
                     String name = scan.nextLine();
@@ -37,11 +39,14 @@ public class Main {
                     System.out.print("Brief description: ");
                     String description = scan.nextLine();
                     assignmentList.add(new Assignment(course, assigned, due, name, description));
+                //edit an assignment's due date
                 } else if (input.equals("edit")) {
                     System.out.print("Give the name of the assignment to edit: ");
                     String name = scan.nextLine();
+                    //get the assignments it might be
                     List<Assignment> assignments = assignmentList.getAssignment(name);
                     Assignment assignment = null;
+                    //find the assignment it is
                     for (Assignment a : assignments) {
                         System.out.println("Is this the correct assignment? (y for yes)\n" + a);
                         String response = scan.nextLine();
@@ -57,14 +62,18 @@ public class Main {
                         String date = scan.nextLine();
                         assignmentList.push(assignment, date);
                     }
+                //mark assignment complete
                 } else if (input.equals("complete")) {
                     Assignment assignment = assignmentList.complete();
                     System.out.println("Assignment \"" + assignment.getName() + "\" marked complete. Nice job!");
+                //check top assignment
                 } else if (input.equals("top")) {
                     String top = assignmentList.top();
                     System.out.println("The top assignment is currently:\n" + top);
+                //exit program. called 'quit' instead of 'exit' to avoid confusion with 'edit'
                 } else if (input.equals("quit")) {
                     break;
+                //if no valid command (or help) is entered, display usage message
                 } else {
                     System.out.println("Usage:\nhelp      display this help message\n" +
                             "add       add a new assignment\n" +

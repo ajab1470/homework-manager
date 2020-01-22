@@ -2,7 +2,7 @@
  * File: Assignment.java
  * Author: Ashley Beckers <ajab1470@gmail.com>
  * Description:
- * Assignment object. Defined by name, date assigned, date due, description
+ * Assignment object. Defined by name, date assigned, date due, course, and description
  */
 
 import java.lang.*;

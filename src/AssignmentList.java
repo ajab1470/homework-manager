@@ -6,7 +6,7 @@
  *   Note: "top" assignment refers to the assignment of the highest priority (least according to natural ordering)
  *   Note: as of current version, the correct format of the text file is as follows:
  *      1. one assignment per line containing ONLY the attributes of the assignment listed in the correct order (see
- *         Assignment::toString) and separated by a "\t" character
+ *         Assignment::toString) and spacing between attributes (see line 43)
  */
 
 import java.io.*;
