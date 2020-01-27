@@ -71,8 +71,8 @@ public class Assignment implements Comparable<Assignment> {
      */
     @Override
     public int compareTo(Assignment o) {
-        if (o.due == this.due) {
-            if (o.assigned == this.assigned) {
+        if (o.due.equals(this.due)) {
+            if (o.assigned.equals(this.assigned)) {
                 return this.name.toUpperCase().compareTo(o.name.toUpperCase());
             } else if (parseDate(this.assigned) < parseDate(o.assigned)) {
                 return -1;
